@@ -1,0 +1,8 @@
+[gd_scene format=3 uid="uid://b1m455o46s8ol"]
+
+[node name="Main" type="CanvasLayer"]
+
+[node name="MenuBar" type="HBoxContainer" parent="."]
+anchors_preset = 10
+anchor_right = 1.0
+grow_horizontal = 2
