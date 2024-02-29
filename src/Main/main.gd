@@ -39,7 +39,6 @@ func _file_item_pressed(id):
 	call(file_button_functions[id])
 
 func _on_open_file_dialog_file_selected(path):
-	print(path)
 	current_file = path
 	text_edit.text = FileAccess.open(path, FileAccess.READ).get_as_text()
 
