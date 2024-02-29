@@ -18,15 +18,17 @@ var current_file = null
 @onready var save_file_dialog = $SaveFileDialog
 
 func new_file():
-	text_edit.text = ''
 	current_file = null
+	text_edit.text = ''
 
 func open_file():
 	open_file_dialog.popup_centered(Vector2(400, 400))
 
 func save_file():
 	if current_file:
-		FileAccess.open(current_file, FileAccess.WRITE).store_string(text_edit.text)
+		var f = FileAccess.open(current_file, FileAccess.WRITE)
+		f.store_string(text_edit.text)
+		f.close()
 	else:
 		save_file_as()
 
@@ -45,8 +47,12 @@ func _file_item_pressed(id):
 
 func _on_open_file_dialog_file_selected(path):
 	current_file = path
-	text_edit.text = FileAccess.open(path, FileAccess.READ).get_as_text()
+	var f = FileAccess.open(path, FileAccess.READ)
+	text_edit.text = f.get_as_text()
+	f.close()
 
 func _on_save_file_dialog_file_selected(path):
 	current_file = path
-	FileAccess.open(path, FileAccess.WRITE).store_string(text_edit.text)
+	var f = FileAccess.open(path, FileAccess.WRITE)
+	f.store_string(text_edit.text)
+	f.close()
