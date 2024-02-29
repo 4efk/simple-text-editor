@@ -1,0 +1,5 @@
+.exe export test
+asd
+asd
+dad
+ad
