@@ -1,6 +1,9 @@
-[gd_scene load_steps=2 format=3 uid="uid://b1m455o46s8ol"]
+[gd_scene load_steps=3 format=3 uid="uid://b1m455o46s8ol"]
 
 [ext_resource type="Script" path="res://Main/main.gd" id="1_l8a7r"]
+
+[sub_resource type="Theme" id="Theme_dy0ml"]
+default_font_size = 32
 
 [node name="Main" type="CanvasLayer"]
 script = ExtResource("1_l8a7r")
@@ -27,7 +30,7 @@ layout_mode = 2
 
 [node name="FileButton" type="MenuButton" parent="VBoxContainer/MenuBar"]
 layout_mode = 2
-theme_override_font_sizes/font_size = 32
+theme = SubResource("Theme_dy0ml")
 text = "File"
 item_count = 2
 popup/item_0/text = "Open"
