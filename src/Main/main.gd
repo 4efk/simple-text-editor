@@ -20,7 +20,10 @@ func open_file():
 	open_file_dialog.popup_centered(Vector2(400, 400))
 
 func save_file():
-	print(1)
+	if current_file:
+		FileAccess.open(current_file, FileAccess.WRITE).store_string(text_edit.text)
+	else:
+		save_file_as()
 
 func save_file_as():
 	save_file_dialog.popup_centered(Vector2(400, 400))
@@ -41,4 +44,5 @@ func _on_open_file_dialog_file_selected(path):
 	text_edit.text = FileAccess.open(path, FileAccess.READ).get_as_text()
 
 func _on_save_file_dialog_file_selected(path):
+	current_file = path
 	FileAccess.open(path, FileAccess.WRITE).store_string(text_edit.text)
