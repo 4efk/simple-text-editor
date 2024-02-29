@@ -17,8 +17,20 @@ var current_file = null
 @onready var open_file_dialog = $OpenFileDialog
 @onready var save_file_dialog = $SaveFileDialog
 
+func _ready():
+	# connecting menubar buttons
+	file_button.get_popup().id_pressed.connect(_file_item_pressed)
+	DisplayServer.window_set_title('Simple Text Editor - Untitled')
+
+func update_window_title():
+	if current_file:
+		DisplayServer.window_set_title('Simple Text Editor - ' + str(current_file))
+	else:
+		DisplayServer.window_set_title('Simple Text Editor - Untitled')
+
 func new_file():
 	current_file = null
+	update_window_title()
 	text_edit.text = ''
 
 func open_file():
@@ -38,21 +50,19 @@ func save_file_as():
 func quit():
 	get_tree().quit()
 
-func _ready():
-	# connecting menubar buttons
-	file_button.get_popup().id_pressed.connect(_file_item_pressed)
-
 func _file_item_pressed(id):
 	call(file_button_functions[id])
 
 func _on_open_file_dialog_file_selected(path):
 	current_file = path
+	update_window_title()
 	var f = FileAccess.open(path, FileAccess.READ)
 	text_edit.text = f.get_as_text()
 	f.close()
 
 func _on_save_file_dialog_file_selected(path):
 	current_file = path
+	update_window_title()
 	var f = FileAccess.open(path, FileAccess.WRITE)
 	f.store_string(text_edit.text)
 	f.close()
