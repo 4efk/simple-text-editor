@@ -1,6 +1,7 @@
 extends CanvasLayer
 
 var file_button_functions = [
+	'new_file',
 	'open_file',
 	'save_file',
 	'save_file_as',
@@ -15,6 +16,10 @@ var current_file = null
 
 @onready var open_file_dialog = $OpenFileDialog
 @onready var save_file_dialog = $SaveFileDialog
+
+func new_file():
+	text_edit.text = ''
+	current_file = null
 
 func open_file():
 	open_file_dialog.popup_centered(Vector2(400, 400))
